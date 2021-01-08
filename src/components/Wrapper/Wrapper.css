@@ -45,10 +45,16 @@
 
 @media only screen and (max-width: 1028px) {
 	.blog-wrapper .Blog {
-		max-width: 485px;
+		max-width: 650px;
 	}
 	.Blog-navbar {
 		margin-top: 10px;
+	}
+}
+
+@media only screen and (max-width: 680px) {
+	.blog-wrapper .Blog {
+		max-width: 485px;
 	}
 }
 

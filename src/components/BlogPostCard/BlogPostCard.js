@@ -11,15 +11,15 @@ import './BlogPostCard.css';
 
 const useStyles = makeStyles({
 	root: {
-		maxWidth: 650,
+		maxWidth: 850,
 		width: '100%',
-		height: 250,
+		height: 300,
 		boxShadow: '0 4px 4px rgba(0,0,0,.25)',
 		margin: 16,
 	},
 	media: {
-		height: 0,
-		paddingTop: '20%',
+		height: 140,
+		// paddingTop: '10%',
 	},
 	content: {
 		padding: 12,

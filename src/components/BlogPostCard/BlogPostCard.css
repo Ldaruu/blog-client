@@ -23,10 +23,20 @@
 	font-size: 14px;
 }
 
+@media only screen and (max-width: 1028px) {
+	.BlogPostCard {
+		max-width: 600px !important;
+	}
+}
+
+@media only screen and (max-width: 680px) {
+	.BlogPostCard {
+		max-width: 440px !important;
+	}
+}
 @media only screen and (max-width: 480px) {
 	.BlogPostCard {
 		width: 100% !important;
 		max-width: 345px !important;
-		height: 200px !important;
 	}
 }
