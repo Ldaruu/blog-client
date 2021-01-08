@@ -12,6 +12,8 @@
 .ArticlePage .ArticlePage_article {
 	width: 600px;
 	min-height: 368px;
+	color: #fff;
+	font-size: 18px;
 }
 
 @media only screen and (max-width: 1028px) {

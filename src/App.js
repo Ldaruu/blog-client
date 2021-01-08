@@ -1,16 +1,21 @@
+import React from 'react';
+import { Route, Switch } from 'react-router';
 import './App.css';
 import ArticlePage from './components/ArticlePage/ArticlePage';
-import BlogPostCard from './components/BlogPostCard/BlogPostCard';
+import LandingPage from './components/LandingPage/LandigPage';
+import Wrapper from './components/Wrapper/Wrapper';
 
-function App() {
+const App = () => {
 	return (
-		<div className='App'>
-			<h1>Hello World!!!</h1>
-			<ArticlePage />
-			<BlogPostCard />
-			<BlogPostCard />
-		</div>
+		<Route path='/'>
+			<Switch>
+				<Wrapper>
+					<Route exact component={LandingPage} path='/' />
+					<Route exact component={ArticlePage} path='/article' />
+				</Wrapper>
+			</Switch>
+		</Route>
 	);
-}
+};
 
 export default App;
