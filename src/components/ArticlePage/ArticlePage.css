@@ -2,6 +2,8 @@
 	overflow: hidden;
 	position: relative;
 	margin-top: 48px;
+	display: flex;
+	justify-content: center;
 }
 .ArticlePage .ArticlePage_article p,
 .ArticlePage .ArticlePage_article a {

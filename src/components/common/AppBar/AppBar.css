@@ -1,0 +1,10 @@
+.top-menu-bar {
+	position: fixed !important;
+	top: 0;
+	width: 100% !important;
+	z-index: 100 !important;
+}
+.AppBar-navigation a {
+	text-decoration: unset;
+	color: unset;
+}

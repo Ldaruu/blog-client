@@ -1,4 +1,5 @@
 import React from 'react';
+import AppBar from '../common/AppBar/AppBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Link, useLocation } from 'react-router-dom';
@@ -19,6 +20,7 @@ const Wrapper = ({ children }) => {
 	return (
 		<div className='blog-wrapper'>
 			<div className='wr-gradient'>
+				<AppBar />
 				<div className='Blog'>
 					<div className='Blog_header'>
 						<Header />
@@ -30,9 +32,6 @@ const Wrapper = ({ children }) => {
 								<>
 									<Button>Edit Blog</Button>
 									<Button>Delete Blog</Button>
-									<Button>
-										<Link to={'/'}>Home</Link>
-									</Button>
 								</>
 							)}
 						</nav>

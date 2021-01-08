@@ -28,11 +28,11 @@
 
 .blog-wrapper .Blog {
 	max-width: 1000px;
-	margin: 0 auto;
+	margin: 65px auto;
 }
 
 .Blog-navbar {
-	margin-top: 20px;
+	margin-top: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
@@ -46,9 +46,6 @@
 @media only screen and (max-width: 1028px) {
 	.blog-wrapper .Blog {
 		max-width: 650px;
-	}
-	.Blog-navbar {
-		margin-top: 10px;
 	}
 }
 
