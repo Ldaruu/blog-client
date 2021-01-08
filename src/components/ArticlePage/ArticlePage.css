@@ -1,0 +1,36 @@
+.ArticlePage {
+	overflow: hidden;
+	position: relative;
+	margin-top: 48px;
+}
+.ArticlePage .ArticlePage_article p,
+.ArticlePage .ArticlePage_article a {
+	font-size: 18px;
+	line-height: 23px;
+}
+
+.ArticlePage .ArticlePage_article {
+	width: 600px;
+	min-height: 368px;
+}
+
+@media only screen and (max-width: 1028px) {
+	.ArticlePage {
+		margin-top: 21px;
+	}
+	.ArticlePage .ArticlePage_article {
+		width: 485px;
+		min-height: 299px;
+	}
+}
+
+@media only screen and (max-width: 485px) {
+	.ArticlePage .ArticlePage_article {
+		width: 345px;
+	}
+	.ArticlePage {
+		width: 345px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
