@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
 	const classes = useStyles();
 	const location = useLocation();
-	const articlePath = matchPath(location.pathname, {
+	const homePath = matchPath(location.pathname, {
 		path: '/',
 		exact: true,
 		strict: false,
@@ -46,7 +46,7 @@ export default function ButtonAppBar() {
 					Blog
 				</Typography>
 				<div className='AppBar-navigation'>
-					{!articlePath && (
+					{!homePath && (
 						<Button className={classes.btnRoot}>
 							<Link to='/'>Home</Link>
 						</Button>

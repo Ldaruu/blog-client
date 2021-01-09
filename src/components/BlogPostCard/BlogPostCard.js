@@ -39,7 +39,7 @@ const BlogPostCard = ({ className, article }) => {
 		<Card
 			className={`${classes.root} ${card}`}
 			onClick={() => fetchOneArticles(article.slug)}>
-			<Link to={article.slug}>
+			<Link to={`/article/${article.slug}`}>
 				<CardActionArea>
 					<CardMedia
 						className={classes.media}
