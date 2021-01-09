@@ -17,7 +17,7 @@ const Header = ({ className }) => {
 		<div className={header} style={divStyle}>
 			<div className='HeaderImage_inner'>
 				<div className='HeaderImage_title'>
-					<h1>{`Laszlo's Blog`}</h1>
+					<h1>{`Simple Blog`}</h1>
 				</div>
 			</div>
 		</div>

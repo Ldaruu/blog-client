@@ -30,7 +30,9 @@ const Wrapper = ({ children }) => {
 							<Button>Create Blog</Button>
 							{articlePath && (
 								<>
-									<Button>Edit Blog</Button>
+									<Button>
+										<Link to='/edit'>Edit Blog</Link>
+									</Button>
 									<Button>Delete Blog</Button>
 								</>
 							)}

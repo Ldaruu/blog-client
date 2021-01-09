@@ -1,0 +1,22 @@
+.AtricleFormCard {
+	margin-top: 20px;
+	padding: 14px;
+}
+
+.ArticleForm-form .form-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ArticleForm-form .title-input {
+	font-size: 17px;
+	padding: 14px 0 16px;
+	max-width: 330px;
+	width: 100%;
+}
+
+.ArticleForm-form .article-submit-btn {
+	margin-top: 16px !important;
+	float: right;
+}
