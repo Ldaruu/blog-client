@@ -9,12 +9,12 @@ const LandigPage = () => {
 		(action) => action.blogData.fetchArticles
 	);
 	useEffect(() => {
-		if (!articles) fetchArticles();
-	}, [articles]);
+		fetchArticles();
+	}, [articles?.length]);
 
 	return (
 		<div className='LandingPage'>
-			{articles?.posts?.map((article) => {
+			{articles?.map((article) => {
 				return <BlogPostCard key={article.id} article={article} />;
 			})}
 		</div>

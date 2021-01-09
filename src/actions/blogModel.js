@@ -17,23 +17,36 @@ const blogData = {
 			method: 'GET',
 			headers: headers,
 		})
-			.then((res) => actions.setArticles(res.data))
+			.then((res) => actions.setArticles(res.data.posts))
 			.catch((error) =>
 				Promise.reject({ error: error, response: error.response.data || {} })
 			);
 	}),
 
 	fetchOneArticle: thunk((actions, payload) => {
-		console.log('P:', payload);
 		axios({
 			url: `${URL}posts/${payload}`,
 			method: 'GET',
 			headers: headers,
-			querry: { slug: JSON.stringify(payload) },
 		})
-			.then((res) => actions.setSingleArticle(res.data))
+			.then((res) => {
+				actions.setSingleArticle(res.data);
+			})
 			.catch((error) =>
 				Promise.reject({ error: error, response: error.response.data || {} })
+			);
+	}),
+
+	postArticle: thunk((actions, payload) => {
+		axios({
+			url: `${URL}posts`,
+			headers: { 'Content-Type': 'multipart/form-data' },
+			method: 'POST',
+			data: payload,
+		})
+			.then((res) => actions.setSingleArticle(res.data?.post))
+			.catch((error) =>
+				Promise.reject({ error: error, response: error.response || {} })
 			);
 	}),
 

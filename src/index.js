@@ -9,13 +9,11 @@ import { blogModel } from './actions/blogModel';
 const store = createStore(blogModel);
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<StoreProvider store={store}>
-				<App />
-			</StoreProvider>
-		</BrowserRouter>
-	</React.StrictMode>,
+	<BrowserRouter>
+		<StoreProvider store={store}>
+			<App />
+		</StoreProvider>
+	</BrowserRouter>,
 	document.getElementById('root')
 );
 

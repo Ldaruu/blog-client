@@ -5,7 +5,9 @@
 	justify-content: center;
 	align-items: center;
 }
-.BlogPostCard a {
+.Article-link {
+	cursor: pointer;
+	width: 100%;
 	color: unset;
 	text-decoration: none;
 }

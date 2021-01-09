@@ -36,10 +36,10 @@ const BlogPostCard = ({ className, article }) => {
 	const classes = useStyles();
 
 	return (
-		<Card
-			className={`${classes.root} ${card}`}
-			onClick={() => fetchOneArticles(article.slug)}>
-			<Link to={`/article/${article.slug}`}>
+		<Link to={`/article/${article.slug}`} className='Article-link'>
+			<Card
+				className={`${classes.root} ${card}`}
+				onClick={() => fetchOneArticles(article.slug)}>
 				<CardActionArea>
 					<CardMedia
 						className={classes.media}
@@ -57,8 +57,8 @@ const BlogPostCard = ({ className, article }) => {
 						</div>
 					</CardContent>
 				</CardActionArea>
-			</Link>
-		</Card>
+			</Card>
+		</Link>
 	);
 };
 

@@ -7,8 +7,10 @@ import Button from '../common/Button/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import cx from 'classnames';
+import { URL } from '../../constants/API';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import './ArticleForm.css';
-
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
 	root: {
 		maxWidth: 1200,
@@ -55,6 +57,19 @@ const ArticleForm = ({ className }) => {
 	const [content, setContent] = useState();
 	const [image, setImage] = useState();
 	let formCard = cx('AtricleFormCard', className);
+	const postArticle = useStoreActions((action) => action.blogData.postArticle);
+	const article = useStoreState((state) => state.blogData.article);
+	let history = useHistory();
+
+	const formData = new FormData();
+	const submitForm = async (e) => {
+		e.preventDefault();
+		formData.append('title', title);
+		formData.append('content', content);
+		formData.append('postImage', image);
+		await postArticle(formData);
+		history.push(`/article/${article.slug}`);
+	};
 
 	return (
 		<Card className={`${classes.root} ${formCard}`}>
@@ -95,7 +110,10 @@ const ArticleForm = ({ className }) => {
 					}}
 					onEditorChange={(content, editor) => setContent(content)}
 				/>
-				<Button className='article-submit-btn' type='submit'>
+				<Button
+					className='article-submit-btn'
+					type='submit'
+					onClick={submitForm}>
 					Post Article
 				</Button>
 			</form>
