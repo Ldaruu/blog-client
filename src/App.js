@@ -12,8 +12,8 @@ const App = () => {
 			<Switch>
 				<Wrapper>
 					<Route exact component={LandingPage} path='/' />
-					<Route exact component={ArticlePage} path='/article' />
-					<Route exact component={ArticleForm} path='/edit' />
+					<Route exact component={ArticlePage} path='/:slug' />
+					<Route exact component={ArticleForm} path='/edit/:slug' />
 				</Wrapper>
 			</Switch>
 		</Route>

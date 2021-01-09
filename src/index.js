@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { StoreProvider, createStore } from 'easy-peasy';
+import { blogModel } from './actions/blogModel';
 // import reportWebVitals from './reportWebVitals';
+const store = createStore(blogModel);
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<StoreProvider store={store}>
+				<App />
+			</StoreProvider>
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root')

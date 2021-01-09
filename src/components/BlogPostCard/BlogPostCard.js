@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cx from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import BabyYoda from '../ArticlePage/images/babyoda.jpeg';
+import { URL } from '../../constants/API';
+import { useStoreActions } from 'easy-peasy';
 import './BlogPostCard.css';
 
 const useStyles = makeStyles({
@@ -26,30 +28,30 @@ const useStyles = makeStyles({
 	},
 });
 
-const BlogPostCard = ({ className }) => {
+const BlogPostCard = ({ className, article }) => {
+	const fetchOneArticles = useStoreActions(
+		(action) => action.blogData.fetchOneArticle
+	);
 	let card = cx('BlogPostCard', className);
 	const classes = useStyles();
+
 	return (
-		<Card className={`${classes.root} ${card}`}>
-			<Link to={'/article'}>
+		<Card
+			className={`${classes.root} ${card}`}
+			onClick={() => fetchOneArticles(article.slug)}>
+			<Link to={article.slug}>
 				<CardActionArea>
 					<CardMedia
 						className={classes.media}
-						image={BabyYoda}
+						image={article.postImage ? URL + article.postImage : BabyYoda}
 						title='Contemplative Reptile'
 					/>
 					<CardContent className={classes.content}>
 						<div className='BlogPostCard_content'>
 							<div className='content-inner'>
-								<h3>Best Title</h3>
+								<h3>{article.title}</h3>
 								<div className='BlogPost_text'>
-									<p>
-										Of course, not everything in your report will exactly be
-										you, there are so many factors that make you, you. We found
-										the best way to approach your Gravity report is to use it as
-										a guide to understand your predispositions. The report can
-										give you an idea about your underlying approaches to life.
-									</p>
+									<p>{article.content}</p>
 								</div>
 							</div>
 						</div>
