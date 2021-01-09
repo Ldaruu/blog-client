@@ -36,11 +36,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	height: 32px;
+	height: 40px;
 }
 .Blog-navbar a {
 	text-decoration: none;
 	color: unset;
+}
+.Create-Article-form .CreatePostForm {
+	max-width: 930px;
+	margin-top: 0;
 }
 
 @media only screen and (max-width: 1028px) {

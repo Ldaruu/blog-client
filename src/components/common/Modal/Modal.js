@@ -4,7 +4,7 @@ import cx from 'classnames';
 const _Modal = (props) => {
 	const { children, open, onClose, className, ...rest } = props;
 	let modal = cx('Modal', className);
-
+	console.log('OPEN:', open);
 	return (
 		<Dialog
 			open={open}

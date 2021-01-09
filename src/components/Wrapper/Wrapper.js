@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '../common/AppBar/AppBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Link, useLocation } from 'react-router-dom';
 import Button from '../common/Button/Button';
+import Modal from '../common/Modal/Modal';
+import ArticleForm from '../ArticleForm/ArticleForm';
 import { matchPath } from 'react-router';
 import './Wrapper.css';
 
@@ -15,7 +17,11 @@ const Wrapper = ({ children }) => {
 		strict: false,
 	});
 
-	// console.log('PATH:', matchBlogPostPath);
+	const [isCreateBlogOpen, openModal] = useState(false);
+
+	const closeFormModal = () => {
+		openModal(false);
+	};
 
 	return (
 		<div className='blog-wrapper'>
@@ -27,7 +33,7 @@ const Wrapper = ({ children }) => {
 					</div>
 					<div className='Blog-body'>
 						<nav className='Blog-navbar'>
-							<Button>Create Blog</Button>
+							<Button onClick={() => openModal(true)}>Create Blog</Button>
 							{articlePath && (
 								<>
 									<Button>
@@ -37,7 +43,14 @@ const Wrapper = ({ children }) => {
 								</>
 							)}
 						</nav>
-
+						<Modal
+							maxWidth={'md'}
+							fullWidth={true}
+							open={isCreateBlogOpen}
+							onClose={closeFormModal}
+							className='Create-Article-form'>
+							<ArticleForm className='CreatePostForm' />
+						</Modal>
 						{children}
 					</div>
 				</div>

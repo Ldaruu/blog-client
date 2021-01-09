@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import Button from '../common/Button/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import cx from 'classnames';
 import './ArticleForm.css';
 
 const useStyles = makeStyles({
@@ -48,14 +49,15 @@ const theme = createMuiTheme({
 	},
 });
 
-const ArticleForm = () => {
+const ArticleForm = ({ className }) => {
 	const classes = useStyles();
 	const [title, setTitle] = useState();
 	const [content, setContent] = useState();
 	const [image, setImage] = useState();
+	let formCard = cx('AtricleFormCard', className);
 
 	return (
-		<Card className={`${classes.root} AtricleFormCard`}>
+		<Card className={`${classes.root} ${formCard}`}>
 			<h2>Write a Blog Post</h2>
 			<form className='ArticleForm-form' noValidate autoComplete='off'>
 				<div className='form-head'>
