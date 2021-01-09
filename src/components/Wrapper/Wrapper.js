@@ -7,20 +7,36 @@ import Button from '../common/Button/Button';
 import Modal from '../common/Modal/Modal';
 import ArticleForm from '../ArticleForm/ArticleForm';
 import { matchPath } from 'react-router';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useHistory } from 'react-router-dom';
 import './Wrapper.css';
 
 const Wrapper = ({ children }) => {
 	const location = useLocation();
+	const article = useStoreState((state) => state.blogData.article);
+	const deleteArticle = useStoreActions(
+		(action) => action.blogData.deleteArticle
+	);
+
 	const articlePath = matchPath(location.pathname, {
-		path: '/article',
+		path: '/article/:slug',
 		exact: true,
 		strict: false,
 	});
+
+	let history = useHistory();
 
 	const [isCreateBlogOpen, openModal] = useState(false);
 
 	const closeFormModal = () => {
 		openModal(false);
+	};
+
+	console.log('Article: ', article);
+
+	const deleteBlogPost = () => {
+		deleteArticle(article._id);
+		history.push('/');
 	};
 
 	return (
@@ -39,7 +55,7 @@ const Wrapper = ({ children }) => {
 									<Button>
 										<Link to='/edit'>Edit Blog</Link>
 									</Button>
-									<Button>Delete Blog</Button>
+									<Button onClick={deleteBlogPost}>Delete Blog</Button>
 								</>
 							)}
 						</nav>

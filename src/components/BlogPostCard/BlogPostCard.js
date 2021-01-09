@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import BabyYoda from '../ArticlePage/images/babyoda.jpeg';
 import { URL } from '../../constants/API';
 import { useStoreActions } from 'easy-peasy';
+import ReactHtmlParser from 'react-html-parser';
 import './BlogPostCard.css';
 
 const useStyles = makeStyles({
@@ -51,7 +52,7 @@ const BlogPostCard = ({ className, article }) => {
 							<div className='content-inner'>
 								<h3>{article.title}</h3>
 								<div className='BlogPost_text'>
-									<p>{article.content}</p>
+									{ReactHtmlParser(article.content)}
 								</div>
 							</div>
 						</div>

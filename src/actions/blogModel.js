@@ -50,6 +50,20 @@ const blogData = {
 			);
 	}),
 
+	deleteArticle: thunk((actions, payload) => {
+		axios({
+			url: `${URL}posts/${payload}`,
+			method: 'DELETE',
+			headers: headers,
+		})
+			.then((res) => {
+				console.log('Post Deleted!');
+			})
+			.catch((error) =>
+				Promise.reject({ error: error, response: error.response.data || {} })
+			);
+	}),
+
 	setArticles: action((state, data) => {
 		state.articles = data;
 	}),
