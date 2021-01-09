@@ -13,7 +13,7 @@ const Header = ({ className }) => {
 	const location = useLocation();
 
 	const articlePath = matchPath(location.pathname, {
-		path: '/article/:slug',
+		path: ['/article/:slug', '/edit/:slug'],
 		exact: true,
 		strict: false,
 	});

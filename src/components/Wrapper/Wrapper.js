@@ -32,8 +32,6 @@ const Wrapper = ({ children }) => {
 		openModal(false);
 	};
 
-	console.log('Article: ', article);
-
 	const deleteBlogPost = () => {
 		deleteArticle(article._id);
 		history.push('/');
@@ -53,7 +51,7 @@ const Wrapper = ({ children }) => {
 							{articlePath && (
 								<>
 									<Button>
-										<Link to='/edit'>Edit Blog</Link>
+										<Link to={'/edit/' + article?.slug}>Edit Blog</Link>
 									</Button>
 									<Button onClick={deleteBlogPost}>Delete Blog</Button>
 								</>
@@ -65,7 +63,10 @@ const Wrapper = ({ children }) => {
 							open={isCreateBlogOpen}
 							onClose={closeFormModal}
 							className='Create-Article-form'>
-							<ArticleForm className='CreatePostForm' />
+							<ArticleForm
+								className='CreatePostForm'
+								closeFormModal={closeFormModal}
+							/>
 						</Modal>
 						{children}
 					</div>

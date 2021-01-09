@@ -4,7 +4,6 @@ import Button from '../../common/Button/Button';
 import './FileUploader.css';
 
 const FileUploader = ({ image, onFileSelectSuccess, onFileSelectError }) => {
-	const fileInput = useRef(null);
 	const handleFileInput = (e) => {
 		// handle validations
 		const file = e.target.files[0];

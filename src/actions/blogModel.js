@@ -46,7 +46,7 @@ const blogData = {
 		})
 			.then((res) => actions.setSingleArticle(res.data?.post))
 			.catch((error) =>
-				Promise.reject({ error: error, response: error.response || {} })
+				Promise.reject({ error: error, response: error.response.data || {} })
 			);
 	}),
 
@@ -58,6 +58,22 @@ const blogData = {
 		})
 			.then((res) => {
 				console.log('Post Deleted!');
+			})
+			.catch((error) =>
+				Promise.reject({ error: error, response: error.response.data || {} })
+			);
+	}),
+
+	updateArticle: thunk((actions, payload, { getState, getStoreState }) => {
+		let id = getState().article._id;
+		axios({
+			url: `${URL}posts/${id}`,
+			headers: { 'Content-Type': 'multipart/form-data' },
+			method: 'PATCH',
+			data: payload,
+		})
+			.then((res) => {
+				actions.setSingleArticle(res.data?.post);
 			})
 			.catch((error) =>
 				Promise.reject({ error: error, response: error.response.data || {} })

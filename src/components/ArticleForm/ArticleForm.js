@@ -9,8 +9,11 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { URL } from '../../constants/API';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import './ArticleForm.css';
 import { useHistory } from 'react-router-dom';
+import { matchPath } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import './ArticleForm.css';
+
 const useStyles = makeStyles({
 	root: {
 		maxWidth: 1200,
@@ -51,24 +54,41 @@ const theme = createMuiTheme({
 	},
 });
 
-const ArticleForm = ({ className }) => {
+const ArticleForm = ({ className, closeFormModal }) => {
 	const classes = useStyles();
 	const [title, setTitle] = useState();
 	const [content, setContent] = useState();
 	const [image, setImage] = useState();
 	let formCard = cx('AtricleFormCard', className);
 	const postArticle = useStoreActions((action) => action.blogData.postArticle);
+	const updateArticle = useStoreActions(
+		(action) => action.blogData.updateArticle
+	);
 	const article = useStoreState((state) => state.blogData.article);
 	let history = useHistory();
-
 	const formData = new FormData();
+	const location = useLocation();
+
+	const editPath = matchPath(location.pathname, {
+		path: '/edit/:slug',
+		exact: true,
+		strict: false,
+	});
+
 	const submitForm = async (e) => {
 		e.preventDefault();
-		formData.append('title', title);
-		formData.append('content', content);
-		formData.append('postImage', image);
-		await postArticle(formData);
-		history.push(`/article/${article.slug}`);
+		formData.append('title', editPath && !title ? article.title : title);
+		formData.append(
+			'content',
+			editPath && !content ? article.content : content
+		);
+		formData.append(
+			'postImage',
+			editPath && !image ? article.postImage : image
+		);
+		editPath ? await updateArticle(formData) : await postArticle(formData);
+		history.push('/article/' + article?.slug);
+		!editPath && closeFormModal();
 	};
 
 	return (
@@ -85,6 +105,7 @@ const ArticleForm = ({ className }) => {
 							type='text'
 							label='Article Title'
 							variant='outlined'
+							defaultValue={editPath && article.title}
 						/>
 					</MuiThemeProvider>
 					<FileUploader
@@ -108,6 +129,7 @@ const ArticleForm = ({ className }) => {
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help',
 					}}
+					initialValue={editPath && article.content}
 					onEditorChange={(content, editor) => setContent(content)}
 				/>
 				<Button
