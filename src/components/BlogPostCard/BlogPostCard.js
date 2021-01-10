@@ -10,6 +10,7 @@ import BabyYoda from '../ArticlePage/images/babyoda.jpeg';
 import { URL } from '../../constants/API';
 import { useStoreActions } from 'easy-peasy';
 import ReactHtmlParser from 'react-html-parser';
+import truncate from 'lodash/truncate';
 import './BlogPostCard.css';
 
 const useStyles = makeStyles({
@@ -36,6 +37,14 @@ const BlogPostCard = ({ className, article }) => {
 	let card = cx('BlogPostCard', className);
 	const classes = useStyles();
 
+	const setText = (text) => {
+		let characters = 300;
+		let tt = truncate(text, { length: characters });
+		return tt;
+	};
+
+	let content = setText(article.content);
+
 	return (
 		<Link to={`/article/${article.slug}`} className='Article-link'>
 			<Card
@@ -51,9 +60,7 @@ const BlogPostCard = ({ className, article }) => {
 						<div className='BlogPostCard_content'>
 							<div className='content-inner'>
 								<h3>{article.title}</h3>
-								<div className='BlogPost_text'>
-									{ReactHtmlParser(article.content)}
-								</div>
+								<div className='BlogPost_text'>{ReactHtmlParser(content)}</div>
 							</div>
 						</div>
 					</CardContent>

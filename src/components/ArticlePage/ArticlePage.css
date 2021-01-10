@@ -38,3 +38,11 @@
 		margin-right: auto;
 	}
 }
+@media only screen and (max-width: 360px) {
+	.ArticlePage {
+		width: 320px;
+	}
+	.ArticlePage .ArticlePage_article {
+		width: 285px;
+	}
+}

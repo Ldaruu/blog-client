@@ -43,3 +43,13 @@
 		font-size: 30px;
 	}
 }
+
+@media only screen and (max-width: 480px) {
+	.HeaderImage_title {
+		min-width: 185px;
+		height: 40px;
+	}
+	.HeaderImage_title h1 {
+		font-size: 18px;
+	}
+}
