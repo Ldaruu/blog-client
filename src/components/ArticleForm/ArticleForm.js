@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import FileUploader from './FileUploader/FileUploader';
@@ -56,19 +56,18 @@ const theme = createMuiTheme({
 
 const ArticleForm = ({ className, closeFormModal }) => {
 	const classes = useStyles();
-	const [title, setTitle] = useState();
-	const [content, setContent] = useState();
-	const [image, setImage] = useState();
-	const [error, setError] = useState();
+	let history = useHistory();
+	const location = useLocation();
+	const form = useRef('Article');
 	let formCard = cx('AtricleFormCard', className);
+
+	const [image, setImage] = useState();
 	const postArticle = useStoreActions((action) => action.blogData.postArticle);
 	const updateArticle = useStoreActions(
 		(action) => action.blogData.updateArticle
 	);
 	const article = useStoreState((state) => state.blogData.article);
-	let history = useHistory();
-	const formData = new FormData();
-	const location = useLocation();
+	const formError = useStoreState((state) => state.blogData.formError);
 
 	const editPath = matchPath(location.pathname, {
 		path: '/edit/:slug',
@@ -78,34 +77,27 @@ const ArticleForm = ({ className, closeFormModal }) => {
 
 	const submitForm = async (e) => {
 		e.preventDefault();
-		if (title && content) {
-			formData.append('title', editPath && !title ? article.title : title);
-			formData.append(
-				'content',
-				editPath && !content ? article.content : content
-			);
-			formData.append(
-				'postImage',
-				editPath && !image ? article.postImage : image
-			);
-			editPath ? await updateArticle(formData) : await postArticle(formData);
-			history.push('/article/' + article?.slug);
-			!editPath && closeFormModal();
-		} else {
-			setError('Title and Conent fields are required!');
-		}
+		const formData = new FormData(form.current);
+		editPath && formData.set('postImage', !image ? article.postImage : image);
+		editPath ? await updateArticle(formData) : await postArticle(formData);
+		history.push('/article/' + article?.slug);
+		!editPath && closeFormModal();
 	};
 
 	return (
 		<Card className={`${classes.root} ${formCard}`}>
 			<h2>Write a Blog Post</h2>
-			<form className='ArticleForm-form' noValidate autoComplete='off'>
+			<form
+				className='ArticleForm-form'
+				noValidate
+				autoComplete='off'
+				ref={form}
+				onSubmit={submitForm}>
 				<div className='form-head'>
 					<MuiThemeProvider theme={theme}>
 						<TextField
 							id='outlined-basic 1'
 							className={`title-input ${classes.focused}`}
-							onChange={(e) => setTitle(e.target.value)}
 							name='title'
 							type='text'
 							label='Article Title'
@@ -116,7 +108,6 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					<FileUploader
 						onFileSelectSuccess={(image) => setImage(image)}
 						onFileSelectError={({ error }) => alert(error)}
-						image={image}
 					/>
 				</div>
 				<Editor
@@ -136,15 +127,16 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					}}
 					initialValue={editPath && article.content}
 					label='content'
-					onEditorChange={(content, editor) => setContent(content)}
+					textareaName='content'
 				/>
-				<Button
-					className='article-submit-btn'
-					type='submit'
-					onClick={submitForm}>
+				<Button className='article-submit-btn' type='submit'>
 					Post Article
 				</Button>
-				{error && <p className='form-error-msg'>{error}</p>}
+				{formError && (
+					<p className='form-error-msg'>
+						Title and the Content fields are required!
+					</p>
+				)}
 			</form>
 		</Card>
 	);

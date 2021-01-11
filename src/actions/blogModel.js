@@ -10,6 +10,7 @@ let headers = {
 const blogData = {
 	articles: null,
 	article: null,
+	formError: false,
 
 	fetchArticles: thunk((actions, payload) => {
 		axios({
@@ -44,10 +45,14 @@ const blogData = {
 			method: 'POST',
 			data: payload,
 		})
-			.then((res) => actions.setSingleArticle(res.data?.post))
-			.catch((error) =>
-				Promise.reject({ error: error, response: error.response.data || {} })
-			);
+			.then((res) => {
+				actions.setFormError(false);
+				actions.setSingleArticle(res.data?.post);
+			})
+			.catch((error) => {
+				actions.setFormError(true);
+				Promise.reject({ error: error, response: error.response.data || {} });
+			});
 	}),
 
 	deleteArticle: thunk((actions, payload) => {
@@ -73,11 +78,13 @@ const blogData = {
 			data: payload,
 		})
 			.then((res) => {
+				actions.setFormError(false);
 				actions.setSingleArticle(res.data?.post);
 			})
-			.catch((error) =>
-				Promise.reject({ error: error, response: error.response.data || {} })
-			);
+			.catch((error) => {
+				actions.setFormError(true);
+				Promise.reject({ error: error, response: error.response.data || {} });
+			});
 	}),
 
 	setArticles: action((state, data) => {
@@ -86,6 +93,10 @@ const blogData = {
 
 	setSingleArticle: action((state, data) => {
 		state.article = data;
+	}),
+
+	setFormError: action((state, data) => {
+		state.formError = data;
 	}),
 };
 

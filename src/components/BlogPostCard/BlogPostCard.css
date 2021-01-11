@@ -16,8 +16,8 @@
 .BlogPostCard {
 	margin: 16px 0 !important;
 }
-.BlogPostCard_content.content-inner {
-	width: 100%;
+.BlogPostCard_content .content-inner {
+	width: 96%;
 	height: 100%;
 	position: relative;
 }

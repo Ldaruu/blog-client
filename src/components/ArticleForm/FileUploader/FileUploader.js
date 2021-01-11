@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../common/Button/Button';
 import './FileUploader.css';
 
-const FileUploader = ({ image, onFileSelectSuccess, onFileSelectError }) => {
+const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
 	const handleFileInput = (e) => {
 		// handle validations
 		const file = e.target.files[0];
