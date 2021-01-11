@@ -59,6 +59,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 	const [title, setTitle] = useState();
 	const [content, setContent] = useState();
 	const [image, setImage] = useState();
+	const [error, setError] = useState();
 	let formCard = cx('AtricleFormCard', className);
 	const postArticle = useStoreActions((action) => action.blogData.postArticle);
 	const updateArticle = useStoreActions(
@@ -77,18 +78,22 @@ const ArticleForm = ({ className, closeFormModal }) => {
 
 	const submitForm = async (e) => {
 		e.preventDefault();
-		formData.append('title', editPath && !title ? article.title : title);
-		formData.append(
-			'content',
-			editPath && !content ? article.content : content
-		);
-		formData.append(
-			'postImage',
-			editPath && !image ? article.postImage : image
-		);
-		editPath ? await updateArticle(formData) : await postArticle(formData);
-		history.push('/article/' + article?.slug);
-		!editPath && closeFormModal();
+		if (title && content) {
+			formData.append('title', editPath && !title ? article.title : title);
+			formData.append(
+				'content',
+				editPath && !content ? article.content : content
+			);
+			formData.append(
+				'postImage',
+				editPath && !image ? article.postImage : image
+			);
+			editPath ? await updateArticle(formData) : await postArticle(formData);
+			history.push('/article/' + article?.slug);
+			!editPath && closeFormModal();
+		} else {
+			setError('Title and Conent fields are required!');
+		}
 	};
 
 	return (
@@ -130,6 +135,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
              bullist numlist outdent indent | removeformat | help',
 					}}
 					initialValue={editPath && article.content}
+					label='content'
 					onEditorChange={(content, editor) => setContent(content)}
 				/>
 				<Button
@@ -138,6 +144,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					onClick={submitForm}>
 					Post Article
 				</Button>
+				{error && <p className='form-error-msg'>{error}</p>}
 			</form>
 		</Card>
 	);

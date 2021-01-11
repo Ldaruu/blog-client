@@ -20,3 +20,8 @@
 	margin-top: 16px !important;
 	float: right;
 }
+.ArticleForm-form .form-error-msg {
+	color: #eb0000;
+	font-weight: 600;
+	letter-spacing: -0.335238px;
+}
