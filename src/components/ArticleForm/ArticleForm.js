@@ -7,7 +7,6 @@ import Button from '../common/Button/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import cx from 'classnames';
-import { URL } from '../../constants/API';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 import { matchPath } from 'react-router';
@@ -61,13 +60,15 @@ const ArticleForm = ({ className, closeFormModal }) => {
 	const form = useRef('Article');
 	let formCard = cx('AtricleFormCard', className);
 
+	const [title, setTitle] = useState();
+	const [content, setContent] = useState();
 	const [image, setImage] = useState();
+	const [formError, setError] = useState(false);
 	const postArticle = useStoreActions((action) => action.blogData.postArticle);
 	const updateArticle = useStoreActions(
 		(action) => action.blogData.updateArticle
 	);
 	const article = useStoreState((state) => state.blogData.article);
-	const formError = useStoreState((state) => state.blogData.formError);
 
 	const editPath = matchPath(location.pathname, {
 		path: '/edit/:slug',
@@ -80,8 +81,15 @@ const ArticleForm = ({ className, closeFormModal }) => {
 		const formData = new FormData(form.current);
 		editPath && formData.set('postImage', !image ? article.postImage : image);
 		editPath ? await updateArticle(formData) : await postArticle(formData);
-		history.push('/article/' + article?.slug);
-		!editPath && closeFormModal();
+		if (!editPath && (!title || !content)) {
+			setError(true);
+		} else if ((!title || !article?.title) && (!content || !article?.content)) {
+			setError(true);
+		} else {
+			setError(false);
+			history.push('/article/' + article?.slug);
+			!editPath && closeFormModal();
+		}
 	};
 
 	return (
@@ -103,6 +111,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 							label='Article Title'
 							variant='outlined'
 							defaultValue={editPath && article.title}
+							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</MuiThemeProvider>
 					<FileUploader
@@ -128,6 +137,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					initialValue={editPath && article.content}
 					label='content'
 					textareaName='content'
+					onEditorChange={(content, editor) => setContent(content)}
 				/>
 				<Button className='article-submit-btn' type='submit'>
 					Post Article
