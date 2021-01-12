@@ -60,8 +60,6 @@ const ArticleForm = ({ className, closeFormModal }) => {
 	const form = useRef('Article');
 	let formCard = cx('AtricleFormCard', className);
 
-	const [title, setTitle] = useState();
-	const [content, setContent] = useState();
 	const [image, setImage] = useState();
 	const [formError, setError] = useState(false);
 	const postArticle = useStoreActions((action) => action.blogData.postArticle);
@@ -110,7 +108,6 @@ const ArticleForm = ({ className, closeFormModal }) => {
 							label='Article Title'
 							variant='outlined'
 							defaultValue={editPath && article.title}
-							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</MuiThemeProvider>
 					<FileUploader
@@ -136,7 +133,6 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					initialValue={editPath && article.content}
 					label='content'
 					textareaName='content'
-					onEditorChange={(content, editor) => setContent(content)}
 				/>
 				<Button className='article-submit-btn' type='submit'>
 					Post Article
