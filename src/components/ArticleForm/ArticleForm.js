@@ -1,17 +1,18 @@
 import React, { useState, useRef } from 'react';
-import Card from '@material-ui/core/Card';
-import TextField from '@material-ui/core/TextField';
+import { Card, TextField } from '@material-ui/core';
 import FileUploader from './FileUploader/FileUploader';
 import { Editor } from '@tinymce/tinymce-react';
 import Button from '../common/Button/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
-import { useLocation } from 'react-router-dom';
 import './ArticleForm.css';
+import {
+	createMuiTheme,
+	MuiThemeProvider,
+	makeStyles,
+} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	root: {

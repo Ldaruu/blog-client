@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import AppBar from '../common/AppBar/AppBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
-import { Link, useLocation } from 'react-router-dom';
 import Button from '../common/Button/Button';
 import Modal from '../common/Modal/Modal';
 import ArticleForm from '../ArticleForm/ArticleForm';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { useHistory } from 'react-router-dom';
 import './Wrapper.css';
 
 const Wrapper = ({ children }) => {
