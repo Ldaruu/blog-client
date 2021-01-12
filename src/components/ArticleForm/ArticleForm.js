@@ -79,11 +79,10 @@ const ArticleForm = ({ className, closeFormModal }) => {
 	const submitForm = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(form.current);
+
 		editPath && formData.set('postImage', !image ? article.postImage : image);
 		editPath ? await updateArticle(formData) : await postArticle(formData);
-		if (!editPath && (!title || !content)) {
-			setError(true);
-		} else if ((!title || !article?.title) && (!content || !article?.content)) {
+		if (!formData.get('title') || !formData.get('content')) {
 			setError(true);
 		} else {
 			setError(false);

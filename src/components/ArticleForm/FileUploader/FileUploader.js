@@ -17,7 +17,6 @@ const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
 
 	const isImage = (file) => {
 		const acceptedImageTypes = ['image/jpeg'];
-		console.log(file && acceptedImageTypes.includes(file['type']));
 		return file && acceptedImageTypes.includes(file['type']);
 	};
 
