@@ -27,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ toggleLoginModal }) {
 	const classes = useStyles();
 	const location = useLocation();
 	const user = useStoreState((state) => state.userData.user);
+	const logOutUser = useStoreActions((action) => action.userData.logOutUser);
 	const homePath = matchPath(location.pathname, {
 		path: '/',
 		exact: true,
@@ -45,12 +46,14 @@ export default function ButtonAppBar() {
 				</Typography>
 				<div className='AppBar-navigation'>
 					{!user && (
-						<Button className={classes.btnRoot}>
+						<Button
+							className={classes.btnRoot}
+							onClick={() => toggleLoginModal(true)}>
 							<Link to='/'>Login</Link>
 						</Button>
 					)}
 					{user && (
-						<Button className={classes.btnRoot}>
+						<Button className={classes.btnRoot} onClick={() => logOutUser()}>
 							<Link to='/'>Logout</Link>
 						</Button>
 					)}

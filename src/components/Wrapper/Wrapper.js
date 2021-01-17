@@ -5,6 +5,7 @@ import Footer from './Footer/Footer';
 import Button from '../common/Button/Button';
 import Modal from '../common/Modal/Modal';
 import ArticleForm from '../ArticleForm/ArticleForm';
+import Login from '../Login/Login';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { useStoreState, useStoreActions } from 'easy-peasy';
@@ -27,6 +28,7 @@ const Wrapper = ({ children }) => {
 	let history = useHistory();
 
 	const [isCreateBlogOpen, openModal] = useState(false);
+	const [isLoginOpen, toggleLoginModal] = useState(false);
 
 	const closeFormModal = () => {
 		openModal(false);
@@ -40,7 +42,7 @@ const Wrapper = ({ children }) => {
 	return (
 		<div className='blog-wrapper'>
 			<div className='wr-gradient'>
-				<AppBar />
+				<AppBar toggleLoginModal={toggleLoginModal} />
 				<div className='Blog'>
 					<div className='Blog_header'>
 						<Header />
@@ -71,6 +73,12 @@ const Wrapper = ({ children }) => {
 								className='CreatePostForm'
 								closeFormModal={closeFormModal}
 							/>
+						</Modal>
+						<Modal
+							maxWidth='sm'
+							open={isLoginOpen}
+							onClose={() => toggleLoginModal(false)}>
+							<Login />
 						</Modal>
 						{children}
 					</div>
