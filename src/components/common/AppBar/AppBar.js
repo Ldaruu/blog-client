@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import './AppBar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
 	const classes = useStyles();
 	const location = useLocation();
+	const user = useStoreState((state) => state.userData.user);
 	const homePath = matchPath(location.pathname, {
 		path: '/',
 		exact: true,
@@ -39,12 +41,17 @@ export default function ButtonAppBar() {
 		<AppBar position='static' className={`${classes.root} top-menu-bar`}>
 			<Toolbar>
 				<Typography variant='h6' className={classes.title}>
-					Blog
+					<Link to='/'>Blog</Link>
 				</Typography>
 				<div className='AppBar-navigation'>
-					{!homePath && (
+					{!user && (
 						<Button className={classes.btnRoot}>
-							<Link to='/'>Home</Link>
+							<Link to='/'>Login</Link>
+						</Button>
+					)}
+					{user && (
+						<Button className={classes.btnRoot}>
+							<Link to='/'>Logout</Link>
 						</Button>
 					)}
 				</div>

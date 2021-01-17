@@ -7,7 +7,7 @@ let headers = {
 	'Content-type': 'application/json',
 };
 
-const blogData = {
+export const blogData = {
 	articles: null,
 	article: null,
 	formError: false,
@@ -98,8 +98,4 @@ const blogData = {
 	setFormError: action((state, data) => {
 		state.formError = data;
 	}),
-};
-
-export const blogModel = {
-	blogData,
 };

@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { StoreProvider, createStore } from 'easy-peasy';
-import { blogModel } from './actions/blogModel';
-// import reportWebVitals from './reportWebVitals';
-const store = createStore(blogModel);
+import { store } from './store/store';
 
 ReactDOM.render(
 	<BrowserRouter>
