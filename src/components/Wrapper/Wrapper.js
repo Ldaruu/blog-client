@@ -12,6 +12,7 @@ import './Wrapper.css';
 
 const Wrapper = ({ children }) => {
 	const location = useLocation();
+	const user = useStoreState((state) => state.userData.user);
 	const article = useStoreState((state) => state.blogData.article);
 	const deleteArticle = useStoreActions(
 		(action) => action.blogData.deleteArticle
@@ -46,13 +47,17 @@ const Wrapper = ({ children }) => {
 					</div>
 					<div className='Blog-body'>
 						<nav className='Blog-navbar'>
-							<Button onClick={() => openModal(true)}>Create Blog</Button>
-							{articlePath && (
+							{user && (
 								<>
-									<Button>
-										<Link to={'/edit/' + article?.slug}>Edit Blog</Link>
-									</Button>
-									<Button onClick={deleteBlogPost}>Delete Blog</Button>
+									<Button onClick={() => openModal(true)}>Create Blog</Button>
+									{articlePath && (
+										<>
+											<Button>
+												<Link to={'/edit/' + article?.slug}>Edit Blog</Link>
+											</Button>
+											<Button onClick={deleteBlogPost}>Delete Blog</Button>
+										</>
+									)}
 								</>
 							)}
 						</nav>
