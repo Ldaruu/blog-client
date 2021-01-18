@@ -38,7 +38,7 @@ const Wrapper = ({ children }) => {
 		deleteArticle();
 		history.push('/');
 	};
-
+	console.log('Art: ', article);
 	return (
 		<div className='blog-wrapper'>
 			<div className='wr-gradient'>
@@ -52,7 +52,7 @@ const Wrapper = ({ children }) => {
 							{user && (
 								<>
 									<Button onClick={() => openModal(true)}>Create Blog</Button>
-									{articlePath && article.user_account?._id === user.id && (
+									{articlePath && article?.user_account?._id === user.id && (
 										<>
 											<Button>
 												<Link to={'/edit/' + article?.slug}>Edit Blog</Link>

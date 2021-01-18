@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { useStoreState, useStoreActions } from 'easy-peasy';
@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
 	btnRoot: {
 		color: '#172830',
 		fontWeight: 600,
-		fontSize: 24,
+		fontSize: 18,
+		letterSpacing: '0.34px',
 		textDecoration: 'none',
 		cursor: 'pointer',
 	},
@@ -53,9 +54,14 @@ export default function ButtonAppBar({ toggleLoginModal }) {
 						</Button>
 					)}
 					{user && (
-						<Button className={classes.btnRoot} onClick={() => logOutUser()}>
-							<Link to='/'>Logout</Link>
-						</Button>
+						<div className='user-btns'>
+							<Avatar className='user-avatar'>
+								{user.userName.split('')[0]}
+							</Avatar>
+							<Button className={classes.btnRoot} onClick={() => logOutUser()}>
+								<Link to='/'>Logout</Link>
+							</Button>
+						</div>
 					)}
 				</div>
 			</Toolbar>

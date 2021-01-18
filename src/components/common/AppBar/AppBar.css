@@ -10,3 +10,14 @@
 	text-decoration: unset;
 	color: unset;
 }
+
+.AppBar-navigation .user-btns {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.AppBar-navigation .user-avatar {
+	background-color: #19191b;
+	box-shadow: 5px 5px 3px 0px rgba(50, 50, 50, 0.75);
+}

@@ -30,9 +30,21 @@ export const userData = {
 			method: 'DELETE',
 			headers: headers,
 			withCredentials: true,
-			headers: headers,
 		})
 			.then((res) => actions.setUser(null))
+			.catch((error) =>
+				Promise.reject({ error: error, response: error.response.data || {} })
+			);
+	}),
+
+	autoLogin: thunk((actions, payload) => {
+		axios({
+			url: `${URL}user/auto_login`,
+			method: 'POST',
+			headers: headers,
+			withCredentials: true,
+		})
+			.then((res) => actions.setUser(res.data))
 			.catch((error) =>
 				Promise.reject({ error: error, response: error.response.data || {} })
 			);

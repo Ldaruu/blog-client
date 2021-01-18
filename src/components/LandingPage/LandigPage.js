@@ -8,8 +8,11 @@ const LandigPage = () => {
 	const fetchArticles = useStoreActions(
 		(action) => action.blogData.fetchArticles
 	);
+	const isUserLoggedIn = useStoreActions((action) => action.userData.autoLogin);
+
 	useEffect(() => {
 		fetchArticles();
+		isUserLoggedIn();
 	}, [articles?.length]);
 
 	return (
