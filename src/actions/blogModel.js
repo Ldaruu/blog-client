@@ -33,7 +33,6 @@ export const blogData = {
 			withCredentials: true,
 		})
 			.then((res) => {
-				console.log('RES: ', res.data);
 				actions.setSingleArticle(res.data);
 			})
 			.catch((error) =>

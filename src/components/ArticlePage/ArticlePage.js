@@ -1,10 +1,17 @@
-import React from 'react';
-import { useStoreState } from 'easy-peasy';
+import React, { useEffect } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import ReactHtmlParser from 'react-html-parser';
 import './ArticlePage.css';
 
-const ArticlePage = () => {
+const ArticlePage = (props) => {
 	const article = useStoreState((state) => state.blogData.article);
+	const fetchOneArticles = useStoreActions(
+		(action) => action.blogData.fetchOneArticle
+	);
+
+	useEffect(() => {
+		fetchOneArticles(props.match.params.slug);
+	}, [!article]);
 
 	return (
 		<div className='ArticlePage'>

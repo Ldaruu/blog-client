@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import BlogPostCard from '../BlogPostCard/BlogPostCard';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import './LandingPage.css';
@@ -8,11 +8,9 @@ const LandigPage = () => {
 	const fetchArticles = useStoreActions(
 		(action) => action.blogData.fetchArticles
 	);
-	const isUserLoggedIn = useStoreActions((action) => action.userData.autoLogin);
 
 	useEffect(() => {
 		fetchArticles();
-		isUserLoggedIn();
 	}, [articles?.length]);
 
 	return (

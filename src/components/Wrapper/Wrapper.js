@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '../common/AppBar/AppBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
@@ -19,6 +19,12 @@ const Wrapper = ({ children }) => {
 		(action) => action.blogData.deleteArticle
 	);
 
+	const isUserLoggedIn = useStoreActions((action) => action.userData.autoLogin);
+
+	useEffect(() => {
+		isUserLoggedIn();
+	}, [!user]);
+
 	const articlePath = matchPath(location.pathname, {
 		path: '/article/:slug',
 		exact: true,
@@ -38,7 +44,7 @@ const Wrapper = ({ children }) => {
 		deleteArticle();
 		history.push('/');
 	};
-	console.log('Art: ', article);
+
 	return (
 		<div className='blog-wrapper'>
 			<div className='wr-gradient'>
