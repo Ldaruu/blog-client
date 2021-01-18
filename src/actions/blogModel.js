@@ -85,7 +85,7 @@ export const blogData = {
 		})
 			.then((res) => {
 				actions.setFormError(false);
-				actions.setSingleArticle(res.data?.post);
+				actions.setSingleArticle(res.data);
 			})
 			.catch((error) => {
 				actions.setFormError(true);
