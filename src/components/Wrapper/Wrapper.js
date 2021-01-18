@@ -35,7 +35,7 @@ const Wrapper = ({ children }) => {
 	};
 
 	const deleteBlogPost = () => {
-		deleteArticle(article._id);
+		deleteArticle();
 		history.push('/');
 	};
 
@@ -52,7 +52,7 @@ const Wrapper = ({ children }) => {
 							{user && (
 								<>
 									<Button onClick={() => openModal(true)}>Create Blog</Button>
-									{articlePath && (
+									{articlePath && article.user_account?._id === user.id && (
 										<>
 											<Button>
 												<Link to={'/edit/' + article?.slug}>Edit Blog</Link>
@@ -78,7 +78,7 @@ const Wrapper = ({ children }) => {
 							maxWidth='sm'
 							open={isLoginOpen}
 							onClose={() => toggleLoginModal(false)}>
-							<Login />
+							<Login toggleLoginModal={toggleLoginModal} />
 						</Modal>
 						{children}
 					</div>

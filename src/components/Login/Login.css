@@ -19,30 +19,10 @@
 }
 
 .loginBtn {
-	font-family: 'Roboto Medium' !important;
 	letter-spacing: 1px !important;
 	font-size: 16px !important;
 	font-weight: 600 !important;
 	margin-top: 14px !important;
 	max-width: 330px !important;
 	width: 100% !important;
-	background-color: #ffc107;
-}
-.loginBtn:hover {
-	background-color: #ffc107 !important;
-}
-
-.registerBtn {
-	font-family: 'Roboto Medium' !important;
-	letter-spacing: 1px !important;
-	font-size: 16px !important;
-	font-weight: 600 !important;
-	margin-top: 24px !important;
-	max-width: 260px !important;
-	background-color: #64dd17 !important;
-	width: 100% !important;
-}
-
-.loginDivider {
-	width: 90%;
 }

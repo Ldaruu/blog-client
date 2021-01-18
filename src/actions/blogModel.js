@@ -17,6 +17,7 @@ export const blogData = {
 			url: `${URL}posts`,
 			method: 'GET',
 			headers: headers,
+			withCredentials: true,
 		})
 			.then((res) => actions.setArticles(res.data.posts))
 			.catch((error) =>
@@ -29,6 +30,7 @@ export const blogData = {
 			url: `${URL}posts/${payload}`,
 			method: 'GET',
 			headers: headers,
+			withCredentials: true,
 		})
 			.then((res) => {
 				actions.setSingleArticle(res.data);
@@ -44,10 +46,11 @@ export const blogData = {
 			headers: { 'Content-Type': 'multipart/form-data' },
 			method: 'POST',
 			data: payload,
+			withCredentials: true,
 		})
 			.then((res) => {
 				actions.setFormError(false);
-				actions.setSingleArticle(res.data?.post);
+				actions.setSingleArticle(res.data.post);
 			})
 			.catch((error) => {
 				actions.setFormError(true);
@@ -55,11 +58,13 @@ export const blogData = {
 			});
 	}),
 
-	deleteArticle: thunk((actions, payload) => {
+	deleteArticle: thunk((actions, payload, { getState, getStoreState }) => {
+		let id = getState().article._id;
 		axios({
-			url: `${URL}posts/${payload}`,
+			url: `${URL}posts/${id}`,
 			method: 'DELETE',
 			headers: headers,
+			withCredentials: true,
 		})
 			.then((res) => {
 				console.log('Post Deleted!');
@@ -76,6 +81,7 @@ export const blogData = {
 			headers: { 'Content-Type': 'multipart/form-data' },
 			method: 'PATCH',
 			data: payload,
+			withCredentials: true,
 		})
 			.then((res) => {
 				actions.setFormError(false);
