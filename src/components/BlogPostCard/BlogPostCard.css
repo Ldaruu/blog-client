@@ -15,6 +15,7 @@
 }
 .BlogPostCard {
 	margin: 16px 0 !important;
+	position: relative;
 }
 .BlogPostCard_content .content-inner {
 	width: 96%;
@@ -26,8 +27,22 @@
 	margin-bottom: 12px;
 	font-size: 18px;
 }
-.BlogPost_text p {
+.BlogPost_text p,
+.BlogPostCard .card-footer p {
 	font-size: 14px;
+}
+
+.BlogPostCard .card-footer {
+	position: absolute;
+	bottom: 1em;
+	right: 2em;
+}
+.BlogPostCard .card-footer p {
+	font-style: italic;
+	margin: 0;
+}
+.BlogPostCard .card-footer span {
+	font-weight: 600;
 }
 
 @media only screen and (max-width: 1028px) {

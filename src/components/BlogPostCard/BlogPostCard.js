@@ -51,22 +51,26 @@ const BlogPostCard = ({ className, article }) => {
 		<Link to={`/article/${article.slug}`} className='Article-link'>
 			<Card
 				className={`${classes.root} ${card}`}
-				onClick={() => fetchOneArticles(article.slug)}>
-				<CardActionArea>
-					<CardMedia
-						className={classes.media}
-						image={article.postImage ? URL + article.postImage : BabyYoda}
-						title='Contemplative Reptile'
-					/>
-					<CardContent className={classes.content}>
-						<div className='BlogPostCard_content'>
-							<div className='content-inner'>
-								<h3>{article.title}</h3>
-								<div className='BlogPost_text'>{ReactHtmlParser(content)}</div>
-							</div>
+				onClick={() => fetchOneArticles(article.slug)}
+			>
+				<CardMedia
+					className={classes.media}
+					image={article.postImage ? URL + article.postImage : BabyYoda}
+					title='Contemplative Reptile'
+				/>
+				<CardContent className={classes.content}>
+					<div className='BlogPostCard_content'>
+						<div className='content-inner'>
+							<h3>{article.title}</h3>
+							<div className='BlogPost_text'>{ReactHtmlParser(content)}</div>
 						</div>
-					</CardContent>
-				</CardActionArea>
+						<div className='card-footer'>
+							<p>
+								Posted by <span>{article.user_account.userName}</span>
+							</p>
+						</div>
+					</div>
+				</CardContent>
 			</Card>
 		</Link>
 	);

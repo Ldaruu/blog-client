@@ -62,5 +62,6 @@
 @media only screen and (max-width: 485px) {
 	.blog-wrapper .Blog {
 		max-width: 375px;
+		margin: 56px auto;
 	}
 }
