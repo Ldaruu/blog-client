@@ -81,6 +81,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 
 		editPath && formData.set('postImage', !image ? article.postImage : image);
 		editPath ? await updateArticle(formData) : await postArticle(formData);
+
 		if (!formData.get('title') || !formData.get('content')) {
 			setError(true);
 		} else {
@@ -98,7 +99,8 @@ const ArticleForm = ({ className, closeFormModal }) => {
 				noValidate
 				autoComplete='off'
 				ref={form}
-				onSubmit={submitForm}>
+				onSubmit={submitForm}
+			>
 				<div className='form-head'>
 					<MuiThemeProvider theme={theme}>
 						<TextField

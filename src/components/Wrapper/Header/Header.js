@@ -23,7 +23,7 @@ const Header = ({ className }) => {
 		backgroundImage: `url(${
 			articlePath && article?.postImage != null ? imageUrl : yoda
 		}), linear-gradient(180deg, #1F1E3D 0%, rgba(26, 20, 80, 0.0001) 191.69%)`,
-		backgroundSize: 'cover',
+		backgroundSize: '100% 100%',
 		backgroundPosition: 'center center',
 		backgroundRepeat: 'no-repeat',
 	};

@@ -10,7 +10,9 @@ const ArticlePage = (props) => {
 	);
 
 	useEffect(() => {
-		fetchOneArticles(props.match.params.slug);
+		if (article?.slug != props.match.params.slug || !article) {
+			fetchOneArticles(props.match.params.slug);
+		}
 	}, [!article]);
 
 	return (
