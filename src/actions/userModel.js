@@ -10,6 +10,20 @@ let headers = {
 export const userData = {
 	user: null,
 
+	signUpUser: thunk((actions, payload) => {
+		axios({
+			url: `${URL}user/signup`,
+			method: 'POST',
+			withCredentials: true,
+			headers: { 'Content-Type': 'multipart/form-data' },
+			data: payload,
+		})
+			.then((res) => console.log('Registered', res))
+			.catch((error) =>
+				Promise.reject({ error: error, response: error.response.data || {} })
+			);
+	}),
+
 	loginUser: thunk((actions, payload) => {
 		axios({
 			url: `${URL}user/login`,

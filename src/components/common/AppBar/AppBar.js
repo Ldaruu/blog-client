@@ -47,11 +47,17 @@ export default function ButtonAppBar({ toggleLoginModal }) {
 				</Typography>
 				<div className='AppBar-navigation'>
 					{!user && (
-						<Button
-							className={classes.btnRoot}
-							onClick={() => toggleLoginModal(true)}>
-							<Link to='/'>Login</Link>
-						</Button>
+						<>
+							<Button className={classes.btnRoot}>
+								<Link to='/signup'>Signup</Link>
+							</Button>
+							<Button
+								className={classes.btnRoot}
+								onClick={() => toggleLoginModal(true)}
+							>
+								<Link to='/'>Login</Link>
+							</Button>
+						</>
 					)}
 					{user && (
 						<div className='user-btns'>

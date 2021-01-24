@@ -67,6 +67,7 @@ export const blogData = {
 			withCredentials: true,
 		})
 			.then((res) => {
+				actions.setSingleArticle(null);
 				console.log('Post Deleted!');
 			})
 			.catch((error) =>

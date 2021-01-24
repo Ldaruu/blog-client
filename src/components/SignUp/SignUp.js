@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import InputField from '../common/InputField/InputField';
 import Card from '@material-ui/core/Card';
 import Button from '../common/Button/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import FileUploader from '../ArticleForm/FileUploader/FileUploader';
-
+import { useStoreActions } from 'easy-peasy';
 import './SignUp.css';
 
 const useStyles = makeStyles({
@@ -20,7 +20,15 @@ const useStyles = makeStyles({
 });
 
 const SignUp = () => {
+	const postArticle = useStoreActions((action) => action.userData.signUpUser);
 	const classes = useStyles();
+	const regForm = useRef('register-form');
+
+	const sumbitRegister = (e) => {
+		e.preventDefault();
+		const formData = new FormData(regForm.current);
+		postArticle(formData);
+	};
 
 	return (
 		<Card className={classes.root}>
@@ -29,30 +37,38 @@ const SignUp = () => {
 				<p>Sing up so you can post articles!</p>
 			</div>
 			<Divider className='regDivider' />
-			<form className='regForm' noValidate autoComplete='off'>
+			<form
+				className='regForm'
+				noValidate
+				autoComplete='off'
+				ref={regForm}
+				onSubmit={sumbitRegister}
+			>
 				<InputField
-					id='outlined-basic'
 					className='regInput'
 					label='email'
-					variant='outlined'
+					name='email'
+					type='email'
 				/>
 				<InputField
-					id='outlined-basic'
 					className='regInput'
 					label='password'
-					variant='outlined'
+					name='password'
+					type='password'
 				/>
 				<InputField
-					id='outlined-basic'
 					className='regInput'
 					label='Displayed Name'
-					variant='outlined'
+					name='userName'
+					type='text'
 				/>
 				<FileUploader
 					className='pic-upload'
 					onFileSelectError={({ error }) => alert(error)}
 				/>
-				<Button className='regBtn'>Register</Button>
+				<Button className='regBtn' type='submit'>
+					Register
+				</Button>
 			</form>
 		</Card>
 	);

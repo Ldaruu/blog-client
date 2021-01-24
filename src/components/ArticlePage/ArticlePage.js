@@ -9,11 +9,11 @@ const ArticlePage = (props) => {
 		(action) => action.blogData.fetchOneArticle
 	);
 
-	useEffect(() => {
-		if (article?.slug != props.match.params.slug || !article) {
-			fetchOneArticles(props.match.params.slug);
-		}
-	}, [!article]);
+	// useEffect(() => {
+	// 	if (article?.slug != props.match.params.slug || !article) {
+	// 		fetchOneArticles(props.match.params.slug);
+	// 	}
+	// }, [!article]);
 
 	return (
 		<div className='ArticlePage'>
