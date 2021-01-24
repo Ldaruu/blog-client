@@ -4,6 +4,7 @@ import './App.css';
 import ArticlePage from './components/ArticlePage/ArticlePage';
 import LandingPage from './components/LandingPage/LandigPage';
 import ArticleForm from './components/ArticleForm/ArticleForm';
+import SignUp from './components/SignUp/SignUp';
 import Wrapper from './components/Wrapper/Wrapper';
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
 			<Switch>
 				<Wrapper>
 					<Route exact component={LandingPage} path='/' />
+					<Route exact component={SignUp} path='/signup' />
 					<Route exact component={ArticlePage} path='/article/:slug' />
 					<Route exact component={ArticleForm} path='/edit/:slug' />
 				</Wrapper>

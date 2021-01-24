@@ -1,0 +1,52 @@
+.regHeader {
+	width: 95%;
+	display: flex;
+	flex-direction: column;
+	padding: 14px 16px;
+	position: relative;
+}
+
+.regClose {
+	position: absolute;
+	right: 6px;
+	top: 18px;
+	cursor: pointer;
+}
+
+.regHeader h1,
+.regHeader p {
+	text-align: center;
+	margin: 0;
+	line-height: 38px;
+}
+.regForm {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-bottom: 44px;
+	padding-top: 10px;
+	width: 100%;
+}
+
+.regInput {
+	font-size: 17px;
+	max-width: 330px;
+	width: 100%;
+	margin-top: 14px !important;
+}
+.regForm .pic-upload {
+	margin-top: 14px;
+}
+
+.regBtn {
+	letter-spacing: 1px !important;
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	margin-top: 34px !important;
+	max-width: 330px !important;
+	width: 100% !important;
+}
+
+.regDivider {
+	width: 90%;
+}

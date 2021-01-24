@@ -1,8 +1,14 @@
 import React from 'react';
 import Button from '../../common/Button/Button';
+import cx from 'classnames';
 import './FileUploader.css';
 
-const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
+const FileUploader = ({
+	onFileSelectSuccess,
+	onFileSelectError,
+	className,
+}) => {
+	const fileUload = cx('file-uploader', className);
 	const handleFileInput = (e) => {
 		// handle validations
 		const file = e.target.files[0];
@@ -21,7 +27,7 @@ const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
 	};
 
 	return (
-		<div className='file-uploader'>
+		<div className={fileUload}>
 			<Button className='file-uploader-btn'>
 				<label>
 					<input
