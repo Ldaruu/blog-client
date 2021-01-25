@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import InputField from '../common/InputField/InputField';
 import Card from '@material-ui/core/Card';
 import Button from '../common/Button/Button';
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 const SignUp = () => {
 	const postArticle = useStoreActions((action) => action.userData.signUpUser);
+	const [avatar, setAvatar] = useState();
 	const classes = useStyles();
 	const regForm = useRef('register-form');
 
@@ -64,7 +65,9 @@ const SignUp = () => {
 				/>
 				<FileUploader
 					className='pic-upload'
+					onFileSelectSuccess={(image) => setAvatar(image)}
 					onFileSelectError={({ error }) => alert(error)}
+					name='avatar'
 				/>
 				<Button className='regBtn' type='submit'>
 					Register

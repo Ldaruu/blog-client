@@ -116,6 +116,7 @@ const ArticleForm = ({ className, closeFormModal }) => {
 					<FileUploader
 						onFileSelectSuccess={(image) => setImage(image)}
 						onFileSelectError={({ error }) => alert(error)}
+						name='postImage'
 					/>
 				</div>
 				<Editor

@@ -7,6 +7,7 @@ const FileUploader = ({
 	onFileSelectSuccess,
 	onFileSelectError,
 	className,
+	name,
 }) => {
 	const fileUload = cx('file-uploader', className);
 	const handleFileInput = (e) => {
@@ -34,7 +35,7 @@ const FileUploader = ({
 						id='file-input'
 						className='image-input'
 						onChange={handleFileInput}
-						name='postImage'
+						name={name}
 						type='file'
 					/>
 					Upload Image
