@@ -50,3 +50,15 @@
 .regDivider {
 	width: 90%;
 }
+
+.regForm .form-error {
+	max-width: 330px;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+.regForm .form-error .error-msg {
+	color: #eb0000;
+	letter-spacing: -0.335238px;
+	line-height: 22px;
+}

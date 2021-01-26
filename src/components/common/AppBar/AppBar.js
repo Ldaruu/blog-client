@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import { URL } from '../../../constants/API';
 import './AppBar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,9 +62,11 @@ export default function ButtonAppBar({ toggleLoginModal }) {
 					)}
 					{user && (
 						<div className='user-btns'>
-							<Avatar className='user-avatar'>
-								{user.userName.split('')[0]}
-							</Avatar>
+							<Avatar
+								className='user-avatar'
+								alt={user.userName.split('')[0]}
+								src={URL + user.avatar}
+							/>
 							<Button className={classes.btnRoot} onClick={() => logOutUser()}>
 								<Link to='/'>Logout</Link>
 							</Button>

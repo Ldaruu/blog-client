@@ -14,12 +14,15 @@ import './Wrapper.css';
 const Wrapper = ({ children }) => {
 	const location = useLocation();
 	const user = useStoreState((state) => state.userData.user);
+	const isLoginOpen = useStoreState((state) => state.userData.isLoginOpen);
 	const article = useStoreState((state) => state.blogData.article);
 	const deleteArticle = useStoreActions(
 		(action) => action.blogData.deleteArticle
 	);
-
 	const isUserLoggedIn = useStoreActions((action) => action.userData.autoLogin);
+	const toggleLoginModal = useStoreActions(
+		(action) => action.userData.toggleLoginModal
+	);
 
 	useEffect(() => {
 		isUserLoggedIn();
@@ -34,7 +37,7 @@ const Wrapper = ({ children }) => {
 	let history = useHistory();
 
 	const [isCreateBlogOpen, openModal] = useState(false);
-	const [isLoginOpen, toggleLoginModal] = useState(false);
+	// const [isLoginOpen, toggleLoginModal] = useState(false);
 
 	const closeFormModal = () => {
 		openModal(false);
@@ -74,7 +77,8 @@ const Wrapper = ({ children }) => {
 							fullWidth={true}
 							open={isCreateBlogOpen}
 							onClose={closeFormModal}
-							className='Create-Article-form'>
+							className='Create-Article-form'
+						>
 							<ArticleForm
 								className='CreatePostForm'
 								closeFormModal={closeFormModal}
@@ -83,7 +87,8 @@ const Wrapper = ({ children }) => {
 						<Modal
 							maxWidth='sm'
 							open={isLoginOpen}
-							onClose={() => toggleLoginModal(false)}>
+							onClose={() => toggleLoginModal(false)}
+						>
 							<Login toggleLoginModal={toggleLoginModal} />
 						</Modal>
 						{children}

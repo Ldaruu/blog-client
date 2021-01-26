@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import FileUploader from '../ArticleForm/FileUploader/FileUploader';
 import { useStoreActions } from 'easy-peasy';
+import { useHistory } from 'react-router-dom';
 import './SignUp.css';
 
 const useStyles = makeStyles({
@@ -16,19 +17,36 @@ const useStyles = makeStyles({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		margin: '40px auto',
 	},
 });
 
 const SignUp = () => {
 	const postArticle = useStoreActions((action) => action.userData.signUpUser);
+	const toggleLoginModal = useStoreActions(
+		(action) => action.userData.toggleLoginModal
+	);
 	const [avatar, setAvatar] = useState();
+	const [singUpError, setError] = useState(false);
 	const classes = useStyles();
+	let history = useHistory();
 	const regForm = useRef('register-form');
 
 	const sumbitRegister = (e) => {
 		e.preventDefault();
 		const formData = new FormData(regForm.current);
-		postArticle(formData);
+		if (
+			!formData.get('email') ||
+			!formData.get('password') ||
+			!formData.get('userName')
+		) {
+			setError(true);
+		} else {
+			setError(false);
+			postArticle(formData);
+			toggleLoginModal(true);
+			history.push('/');
+		}
 	};
 
 	return (
@@ -72,6 +90,14 @@ const SignUp = () => {
 				<Button className='regBtn' type='submit'>
 					Register
 				</Button>
+				{singUpError && (
+					<div className='form-error'>
+						<p className='error-msg'>
+							The following fields are required:
+							<br /> email, password , username
+						</p>
+					</div>
+				)}
 			</form>
 		</Card>
 	);

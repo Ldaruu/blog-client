@@ -9,6 +9,7 @@ let headers = {
 
 export const userData = {
 	user: null,
+	isLoginOpen: false,
 
 	signUpUser: thunk((actions, payload) => {
 		axios({
@@ -66,5 +67,9 @@ export const userData = {
 
 	setUser: action((state, data) => {
 		state.user = data;
+	}),
+
+	toggleLoginModal: action((state, data) => {
+		state.isLoginOpen = data;
 	}),
 };
